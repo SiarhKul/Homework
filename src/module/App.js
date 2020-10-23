@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import Button from './button/Button.js'
 
 export default class App extends Component {
+
+
     render() {
         return (
             <div>
-                <h1>Same text</h1>
-                <span>Fill field</span>
+                <h1></h1>
+                <span></span>
                 <input type="text" />
             </div>
         )
