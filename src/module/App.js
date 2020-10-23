@@ -2,6 +2,14 @@ import React, { Component } from 'react'
 import Button from './button/Button.js'
 
 export default class App extends Component {
+    state = {
+        btnName: null,
+        btnNameText: "Button"
+    }
+
+    btnClickHandler = (btnN) => {
+        this.setState({ btnName: btnN })
+    }
 
 
     render() {
@@ -10,6 +18,7 @@ export default class App extends Component {
                 <h1></h1>
                 <span></span>
                 <input type="text" />
+                <Button onClick={this.btnClickHandler} btnName={this.state.btnNameText} />
             </div>
         )
     }
