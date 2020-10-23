@@ -4,7 +4,9 @@ export default class App extends Component {
     render() {
         return (
             <div>
-
+                <h1>Same text</h1>
+                <span>Fill field</span>
+                <input type="text" />
             </div>
         )
     }
