@@ -10,14 +10,16 @@ export default class App extends Component {
     btnClickHandler = (btnN) => {
         this.setState({ btnName: btnN })
     }
-
+    inputChangeHandler = ({ target }) => {
+        this.setState({ btnNameText: target.value })
+    }
 
     render() {
         return (
             <div>
-                <h1></h1>
-                <span></span>
-                <input type="text" />
+                <h1>{this.state.btnName}</h1>
+                <span>Fill field</span>
+                <input onChange={this.inputChangeHandler} type="text" />
                 <Button onClick={this.btnClickHandler} btnName={this.state.btnNameText} />
             </div>
         )
