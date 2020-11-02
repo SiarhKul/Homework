@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function ButtonOK() {
+export default function ButtonOK({ click }) {
    return (
       <div>
-         <button>Get list</button>
+         <button onClick={click} >OK</button>
       </div>
    )
 }
