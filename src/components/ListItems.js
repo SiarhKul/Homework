@@ -1,10 +1,9 @@
 import React from 'react'
 
-export default function ListItems({ list }) {
+export default function ListItems({ text }) {
    return (
       <>
-
-         <li>{list}</li>
+         <li>{text}</li>
 
       </>
    )

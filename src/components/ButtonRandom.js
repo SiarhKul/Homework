@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function ButtonRandom() {
+export default function ButtonRandom({ click }) {
    return (
       <div>
-         <button>Botton Random</button>
+         <button onClick={click}>Botton Random</button>
       </div>
    )
 }
