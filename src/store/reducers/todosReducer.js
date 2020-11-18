@@ -22,6 +22,13 @@ export const todoReducer = (state = defaultState, action) => {
                return item.id === action.payload ? { ...item, done: true } : { ...item }
             })
          }
+      case REMOVE_CASE_DONE:
+         return {
+            ...state,
+            todos: state.todos.filter((todo) => {
+               return todo.id !== action.payload
+            })
+         }
       default:
          return state;
    }

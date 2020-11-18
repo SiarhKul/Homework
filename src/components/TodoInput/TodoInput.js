@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import { createTodo } from '../../store/actions/todos.js'
-
 
 function TodoInput({ addItem }) {
    const [inputText, setInputText] = useState('');
@@ -11,10 +10,16 @@ function TodoInput({ addItem }) {
       setInputText(value);
    }
 
+   const setEmptyInput = useCallback(
+      () => {
+         setInputText('')
+      }, [])
+
    return (
       <>
          <input type="text" value={inputText} onChange={onInputChange} />
-         <button onClick={() => addItem(inputText)}>Add</button>
+         <button onClick={() => { addItem(inputText); setEmptyInput() }}>Add</button>
+
       </>
    )
 }
@@ -26,3 +31,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(TodoInput)
+

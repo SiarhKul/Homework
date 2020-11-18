@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { changeDone } from '../../store/actions/todos.js';
 import TodoItem from './TodoItem/TodoItem.js'
 
-function TodoList({ todos, onDone }) {
+function TodoList({ todos, onDone, }) {
    return (
       <ul>
          {todos.map(({ text, id, done }) =>
@@ -27,6 +27,8 @@ const mapStateToProps = (state) => {
    }
 }
 
-const mapDispatchToProps = dispatch => ({ onDone: (id) => dispatch(changeDone(id)) })
+const mapDispatchToProps = dispatch => ({
+   onDone: (id) => dispatch(changeDone(id)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
