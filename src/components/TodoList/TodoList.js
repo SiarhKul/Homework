@@ -5,24 +5,26 @@ import { changeDone } from '../../store/actions/todos.js';
 import TodoItem from './TodoItem/TodoItem.js'
 
 function TodoList({ todos, onDone, chosen, filterText }) {
+
+
+
+
    const [casesToShow, setCasesToShow] = useState(todos)
-   console.log('filtertext-', filterText);
-   console.log('text-', todos.text);
+
    useEffect(() => {
-      if (chosen === 'all') {
-         setCasesToShow(todos)
-      } else if (chosen === 'done') {
-         setCasesToShow(todos.filter(todo => todo.done))
-      } else {
-         setCasesToShow(todos.filter(todo => !todo.done))
+      let filteredTodos = todos;
+
+      if (chosen === 'done') {
+         filteredTodos = filteredTodos.filter(todo => todo.done);
+      } else if (chosen === 'not-done') {
+         filteredTodos = filteredTodos.filter(todo => !todo.done);
       }
-   }, [chosen, todos])
 
-   useEffect(() => {
-      setCasesToShow(casesToShow.filter(({ text }) => text.toLowerCase()
-         .includes(filterText.toLowerCase())))
-   }, [filterText])
+      filteredTodos = filteredTodos.filter(({ text }) => text.toLowerCase().includes(filterText.toLowerCase()))
 
+      setCasesToShow(filteredTodos);
+
+   }, [chosen, todos, filterText]);
 
    return (
       <ul>
@@ -51,3 +53,59 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
+
+
+
+// import TodoItem from './TodoItem/TodoItem';
+// import {changeDone, removeCase} from '../../store/actions/todos';
+// import {connect} from 'react-redux';
+// import { useEffect, useState } from 'react';
+
+// const TodoList = ({
+//   todos,
+//   onDone,
+//   onRemove,
+//   chosen,
+//   filterText
+// }) => {
+
+//   const  [casesToShow, setCasesToShow] = useState(todos);
+
+//   useEffect(() => {
+//     let filteredTodos = todos;
+
+//     if (chosen === 'done') {
+//       filteredTodos = filteredTodos.filter(todo => todo.done);
+//     } else if (chosen === 'not-done') {
+//       filteredTodos = filteredTodos.filter(todo => !todo.done);
+//     }
+
+//     filteredTodos = filteredTodos.filter(({text}) => text.toLowerCase().includes(filterText.toLowerCase()))
+
+//     setCasesToShow(filteredTodos);
+
+//   }, [chosen, todos, filterText]);
+
+
+//   return (
+//     <ul>
+//       {casesToShow.map(({text, id, done}) => 
+//         <TodoItem 
+//           text={text}
+//           key={id}
+//           done={done}
+//           id={id}
+//           onDone={onDone}
+//           onRemove={onRemove}
+//         />)} 
+//     </ul>
+//   )
+// };
+
+// const mapStateToProps = ({todos, chosen, filterText}) => ({todos, chosen, filterText});
+// const mapDispatchToProps = dispatch => ({
+//   onDone: id => dispatch(changeDone(id)),
+//   onRemove: id => dispatch(removeCase(id))
+// })
+
+// export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

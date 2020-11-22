@@ -6,7 +6,7 @@ const TodoChoser = ({ onChooserClick }) => {
    return (
       <div>
          <button onClick={() => { onChooserClick('done') }}>done</button>
-         <button onClick={() => { onChooserClick('no done') }}> no done</button>
+         <button onClick={() => { onChooserClick('not-done') }}> no done</button>
          <button onClick={() => { onChooserClick('all') }} >all</button>
       </div>
    )
