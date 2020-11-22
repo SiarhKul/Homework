@@ -19,7 +19,6 @@ function TodoInput({ addItem }) {
       <>
          <input type="text" value={inputText} onChange={onInputChange} />
          <button onClick={() => { addItem(inputText); setEmptyInput() }}>Add</button>
-
       </>
    )
 }

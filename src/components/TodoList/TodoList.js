@@ -1,12 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useState } from 'react';
 import { connect } from 'react-redux'
 import { changeDone } from '../../store/actions/todos.js';
 import TodoItem from './TodoItem/TodoItem.js'
 
-function TodoList({ todos, onDone, }) {
+function TodoList({ todos, onDone, chosen, filterText }) {
+   const [casesToShow, setCasesToShow] = useState(todos)
+   console.log('filtertext-', filterText);
+   console.log('text-', todos.text);
+   useEffect(() => {
+      if (chosen === 'all') {
+         setCasesToShow(todos)
+      } else if (chosen === 'done') {
+         setCasesToShow(todos.filter(todo => todo.done))
+      } else {
+         setCasesToShow(todos.filter(todo => !todo.done))
+      }
+   }, [chosen, todos])
+
+   useEffect(() => {
+      setCasesToShow(casesToShow.filter(({ text }) => text.toLowerCase()
+         .includes(filterText.toLowerCase())))
+   }, [filterText])
+
+
    return (
       <ul>
-         {todos.map(({ text, id, done }) =>
+         {casesToShow.map(({ text, id, done }) =>
             <TodoItem
                key={id}
                text={text}
@@ -18,12 +38,11 @@ function TodoList({ todos, onDone, }) {
    )
 }
 
-
-// const mapStateToProps = ({ todos }) => ({ todos });
-
 const mapStateToProps = (state) => {
    return {
-      todos: state.todos
+      todos: state.todos,
+      chosen: state.chosen,
+      filterText: state.filterText
    }
 }
 
